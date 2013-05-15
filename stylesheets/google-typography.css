@@ -1,0 +1,227 @@
+div#google_typography {
+}
+	div#google_typography .help_hint {
+		width: 132px;
+		height: 50px;
+		background: url('../images/help_hint.png') no-repeat;
+		position: absolute;
+		top: -75px;
+		right: 25px;
+
+	}
+	div#google_typography .welcome {
+		display: none;
+		font-family: 'Lato';
+		text-align: center;
+		margin-top: 60px;
+		position: relative;
+	}
+		div#google_typography .welcome .welcome_title { margin-bottom: 55px; }
+		div#google_typography .welcome .welcome_title h1 {
+			font-size: 40px;
+			color: #666;
+			font-weight: 300;
+			margin-bottom: 40px;
+		}
+		div#google_typography .welcome .welcome_title p {
+			font-size: 17px;
+			color: #aaa;
+			font-weight: 300;
+		}
+			div#google_typography .welcome ul.steps {
+				list-style: none;
+				overflow: hidden;
+			}
+				div#google_typography .welcome ul.steps li {
+					float: left;
+					width: 33%;
+					padding-top: 220px;
+				}
+					div#google_typography .welcome ul.steps li h3 {
+						font-size: 22px;
+						font-weight: 400;
+						margin-bottom: 20px;
+					}
+					div#google_typography .welcome ul.steps li p {
+						font-size: 13px;
+						color: #999;
+					}
+				div#google_typography .welcome ul.steps li.step_1 {
+					background: url('../images/step_1.png') no-repeat top center;
+				}
+				div#google_typography .welcome ul.steps li.step_2 {
+					background: url('../images/step_2.png') no-repeat top center;
+				}
+				div#google_typography .welcome ul.steps li.step_3 {
+					background: url('../images/step_3.png') no-repeat top center;
+				}
+				@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 144dpi)  {
+					div#google_typography .welcome ul.steps li.step_1 {
+						background: url('../images/step_1@2x.png') no-repeat top center;
+						background-size: 210px 210px;
+					}
+					div#google_typography .welcome ul.steps li.step_2 {
+						background: url('../images/step_2@2x.png') no-repeat top center;
+						background-size: 210px 210px;						
+					}
+					div#google_typography .welcome ul.steps li.step_3 {
+						background: url('../images/step_3@2x.png') no-repeat top center;
+						background-size: 210px 210px;
+					}
+				}
+	div#google_typography .template { display: none; }
+	div#google_typography .collections {
+		margin-top: 20px;
+
+	}
+		div#google_typography .collection {
+			border: 1px solid #d9d9d9;
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+			border-radius: 4px;
+			background-color: #fff;
+			margin-bottom: 20px;
+			-webkit-transition: box-shadow 0.2s ease-in;  
+	    -moz-transition: box-shadow 0.2s ease-in;  
+	    -o-transition: box-shadow 0.2s ease-in;  
+	    transition: box-shadow 0.2s ease-in;
+			cursor: move;
+		}
+		div#google_typography .collection.current {
+			border: 1px solid #aaa;
+			-moz-box-shadow: 0 0 10px rgba(1,1,1,.25);
+			-webkit-box-shadow: 0 0 10px rgba(1,1,1,.25);
+			box-shadow: 0 0 10px rgba(1,1,1,.25);
+		}
+		/* Preview */
+		div#google_typography .font_preview {
+			padding: 20px;
+			min-height: 30px;
+			font-size: 32px;
+			position: relative;
+			-webkit-border-radius: 4px 4px 0px 0px;
+			-moz-border-radius: 4px 4px 0px 0px;
+			border-radius: 4px 4px 0px 0px;
+		}
+		div#google_typography .font_preview.dark,
+		div#google_typography .font_preview.dark input {
+			background: #313131;
+		}
+			div#google_typography .font_preview input{
+				border: 0;
+				padding: 0;
+				width: 98%;
+			}
+				div#google_typography .font_preview input:focus { 
+					-webkit-box-shadow: none;
+					-moz-box-shadow: none; 
+					box-shadow: none;
+				}
+				div#google_typography .font_preview ul.preview_color {
+					list-style: none;
+					position: absolute;
+					top: -10px;
+					right: 15px;
+				}	
+					div#google_typography .font_preview ul.preview_color li {
+						
+					}
+						div#google_typography .font_preview ul.preview_color li a {
+							width: 9px;
+							height: 9px;
+							text-indent: -999999px;
+							display: block;
+							-webkit-border-radius: 100%;
+							-moz-border-radius: 100%;
+							border-radius: 100%;
+							background: #fff;
+							border: 1px solid rgba(0,0,0,0.2);
+							cursor: pointer;
+						}
+						div#google_typography .font_preview ul.preview_color li a.dark { background: #292929; border: 1px solid rgba(255,255,255,0.4); }
+		/* Options */
+		div#google_typography .font_options {
+			padding: 10px;
+			background: #f5f5f5; 
+			border-top: 1px solid #d9d9d9;
+			-webkit-border-radius: 0px 0px 4px 4px;
+			-moz-border-radius: 0px 0px 4px 4px;
+			border-radius: 0px 0px 4px 4px;
+		}
+		div#google_typography .font_options .left_col { float: left; }
+		div#google_typography .font_options .right_col { 
+			float: right;
+			opacity: 0;
+			-webkit-transition: all 0.2s ease-in;  
+	    -moz-transition: all 0.2s ease-in;  
+	    -o-transition: all 0.2s ease-in;  
+	    transition: all 0.2s ease-in;
+		}
+		div#google_typography .collection.current .font_options .right_col { opacity: 1; }
+			div#google_typography .font_options .font_family       { width: 210px; }
+			div#google_typography .font_options .font_variant      { width: 105px; }
+			div#google_typography .font_options .font_size         { width: 105px; }
+			div#google_typography .font_options .wp-color-result { 
+			  height: 30px;
+			  margin: -8px 0px 0px 0;
+			  vertical-align: top;
+			}
+			div#google_typography .font_options .wp-color-result:after { line-height: 30px; }
+			div#google_typography .font_options .wp-picker-open { top: 1px; }
+			div#google_typography .font_options .wp-picker-holder { position: absolute; }
+			div#google_typography .font_options .wp-picker-input-wrap { margin-top: -7px; }
+			div#google_typography .font_options .wp-picker-clear { display: none; }
+			div#google_typography .font_options .wp-picker-container .iris-picker { z-index: 1000; }
+			div#google_typography .font_options .font_color,
+			div#google_typography .font_options .css_selectors { padding: 7px 7px 8px 7px; margin: 0; }
+			div#google_typography .font_options .font_color { margin-left: 3px; }
+			div#google_typography .font_options .css_selectors { width: 220px; }	
+		div#google_typography .font_options a.save_collection.saving { opacity: .5; }
+		div#google_typography .font_options a.delete_collection { 
+			color: #f00; 
+			margin-right: 10px; 
+			text-decoration: none; 
+			border-bottom: 1px solid; 
+			padding: 1px 2px;
+			-webkit-transition: all 0.2s ease-in;  
+	    -moz-transition: all 0.2s ease-in;  
+	    -o-transition: all 0.2s ease-in;  
+	    transition: all 0.2s ease-in; 
+		}
+		div#google_typography .font_options a.delete_collection:hover { background: #f00; color: #fff; }
+	div#google_typography .css_selectors {
+		-webkit-transition: all 200ms linear;
+	  -moz-transition: all 200ms linear;
+		border: none;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	}
+	div#google_typography .css_selectors:focus {
+		box-shadow: 0 0 0 1px #ccc, 0 0 8px #ccc, 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+	}
+div#google_typography .loading {
+	width: 600px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+	display: none;
+}
+	div#google_typography .loading .spin {
+		width: 34px;
+		height: 34px;
+		background: url('../images/spinner.gif') no-repeat;
+		display: block;
+		margin: 0 auto 15px auto;
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 144dpi)  {
+		div#google_typography .loading .spin {
+			background: url('../images/spinner@2x.gif') no-repeat;
+			background-size: 34px 34px;
+		}
+	}
+/*--------------------------------------------
+Misc
+---------------------------------------------*/
+.clear {
+  clear: both;
+}
+div#google_typography a,
+div#google_typography select { outline: none; }
