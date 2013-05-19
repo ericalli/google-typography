@@ -176,7 +176,7 @@
 		
 		loadCollection = function(values, collection) {
 			
-			collection.find(".preview_text").val(values.preview_text);
+			collection.find(".preview_text").val(values.preview_text.replace("\\", ""));
 			collection.find(".preview_color li a[class="+values.preview_color+"]").trigger("click");
 			
 			if(values.font_family) {

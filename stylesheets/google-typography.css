@@ -1,5 +1,4 @@
-div#google_typography {
-}
+div#google_typography { }
 	div#google_typography .help_hint {
 		width: 132px;
 		height: 50px;
@@ -7,7 +6,6 @@ div#google_typography {
 		position: absolute;
 		top: -75px;
 		right: 25px;
-
 	}
 	div#google_typography .welcome {
 		display: none;
@@ -70,9 +68,9 @@ div#google_typography {
 					}
 				}
 	div#google_typography .template { display: none; }
+	div#google_typography .collections_wrap { overflow: hidden; width: 100%; }
 	div#google_typography .collections {
 		margin-top: 20px;
-
 	}
 		div#google_typography .collection {
 			border: 1px solid #d9d9d9;
@@ -120,12 +118,12 @@ div#google_typography {
 				div#google_typography .font_preview ul.preview_color {
 					list-style: none;
 					position: absolute;
-					top: -10px;
+					top: 25px;
 					right: 15px;
+					margin: 0;
+					padding: 0;
 				}	
-					div#google_typography .font_preview ul.preview_color li {
-						
-					}
+					div#google_typography .font_preview ul.preview_color li { }
 						div#google_typography .font_preview ul.preview_color li a {
 							width: 9px;
 							height: 9px;

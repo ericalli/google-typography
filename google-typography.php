@@ -5,8 +5,7 @@ Plugin URI: http://github.com/ericalli/google-typography
 Description: A simple plugin that lets you use and customize (in real-time!) any fonts from Google Fonts on your existing site, all without writing a single line of code.
 Version: 1.0
 Author: Eric Alli
-Author URI: http://two2twelve.com
-License: GPL2
+Author URI: http://ericalli.com
 */
 
 /**
@@ -54,6 +53,17 @@ class GoogleTypography {
 		}
 
 	}
+	
+	function &init() {
+		static $instance = false;
+
+		if ( !$instance ) {
+			$instance = new GoogleTypography();
+		}
+
+		return $instance;
+	}
+	
 
 	/**
 	 * Initialize plugin for localization
@@ -147,31 +157,35 @@ class GoogleTypography {
 		
 		$import_fonts = array();
 		$font_styles = '';
-		
-		foreach($collections as $collection){
-			
-			if(isset($collection['css_selectors']) && $collection['css_selectors'] != "") {
-				
-				array_push($import_fonts, array('font_family' => $collection['font_family'], 'font_variant' => $collection['font_variant']));
 
-				$font_styles .= $collection['css_selectors'] . '{ ';
-				$font_styles .= 'font-family: "' . $collection['font_family'] . '";';
-				$font_styles .= 'font-weight: ' . $collection['font_variant'] . ';';
-				$font_styles .= 'font-size: ' . $collection['font_size'] . ';';
-				$font_styles .= 'color: ' . $collection['font_color'] . ';';
-				$font_styles .= " }\n";
+		if($collections) {
+		
+			foreach($collections as $collection){
 			
+				if(isset($collection['css_selectors']) && $collection['css_selectors'] != "") {
+				
+					array_push($import_fonts, array('font_family' => $collection['font_family'], 'font_variant' => $collection['font_variant']));
+
+					$font_styles .= $collection['css_selectors'] . '{ ';
+					$font_styles .= 'font-family: "' . $collection['font_family'] . '";';
+					$font_styles .= 'font-weight: ' . $collection['font_variant'] . ';';
+					$font_styles .= 'font-size: ' . $collection['font_size'] . ';';
+					$font_styles .= 'color: ' . $collection['font_color'] . ';';
+					$font_styles .= " }\n";
+			
+				}
 			}
+		
+			$import_url = '@import url(' . $this->fonts_url . $this->stringify_fonts($import_fonts) .');';
+		
+			$frontend = "\n<style type=\"text/css\">\n";
+			$frontend .= $import_url."\n";
+			$frontend .= $font_styles;
+			$frontend .= "</style>\n";
+		
+			echo $frontend;
+		
 		}
-		
-		$import_url = '@import url(' . $this->fonts_url . $this->stringify_fonts($import_fonts) .');';
-		
-		$frontend = "\n<style type=\"text/css\">\n";
-		$frontend .= $import_url."\n";
-		$frontend .= $font_styles;
-		$frontend .= "</style>\n";
-		
-		echo $frontend;
 		
 	}
 	
@@ -319,7 +333,9 @@ class GoogleTypography {
 					
 				</div>
 				
-				<div class="collections"></div>
+				<div class="collections_wrap">
+					<div class="collections"></div>
+				</div>
 			</div>
 				
 EOT;
@@ -490,7 +506,7 @@ EOT;
 	    return false;
 	  }
 
-	  foreach ($parents as $key => $value) {
+	  foreach($parents as $key => $value) {
 	    $exists = true;
 	    foreach ($searched as $skey => $svalue) {
 	      $exists = ($exists && IsSet($parents[$key][$skey]) && $parents[$key][$skey] == $svalue);
@@ -501,6 +517,9 @@ EOT;
 	  return false;
 	}
 	
+	function add_defaults() {
+		
+	}
 	
 	/**
 	 * Enqueue admin styles and scripts
@@ -533,4 +552,4 @@ EOT;
 	}
 }
 
-new GoogleTypography();
+GoogleTypography::init();
