@@ -1,0 +1,214 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Typography\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-16 17:03-0800\n"
+"PO-Revision-Date: 2013-05-16 17:04-0800\n"
+"Last-Translator: Two2Twelve Themes <info@two2twelve.com>\n"
+"Language-Team: Eric Alli <hello@ericalli.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: USA\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: google-typography.php:103
+msgid "Adding A Collection"
+msgstr ""
+
+#: google-typography.php:104
+msgid "To add a new font for use on your site. Click the \"Add New\" button on the top left of the page near the \"Google Typography\" title."
+msgstr ""
+
+#: google-typography.php:105
+msgid "Once added, a new font row will appear on the page below. Next you can continue to customize your font (more info in the \"Customizing\" help tab)."
+msgstr ""
+
+#: google-typography.php:106
+msgid "Watch The Video Tutorial &rarr;"
+msgstr ""
+
+#: google-typography.php:107
+msgid "Customizing"
+msgstr ""
+
+#: google-typography.php:108
+msgid "Customizing fonts is easy; after adding a new font row you can then customize the following font attributes:"
+msgstr ""
+
+#: google-typography.php:109
+msgid "Preview Text"
+msgstr ""
+
+#: google-typography.php:109
+msgid "Used for live previewing your changes. This text does not appear anywhere on your website."
+msgstr ""
+
+#: google-typography.php:109
+msgid "Font Family"
+msgstr ""
+
+#: google-typography.php:109
+msgid "The font family to use for this font. Choose from a real-time list of all available Google Fonts."
+msgstr ""
+
+#: google-typography.php:109
+msgid "Font Variant"
+msgstr ""
+
+#: google-typography.php:109
+msgid "The variant to use for this font. Note: Each font has it's own variant options."
+msgstr ""
+
+#: google-typography.php:109
+msgid "Font Size"
+msgstr ""
+
+#: google-typography.php:109
+msgid "The size you would like this font to be."
+msgstr ""
+
+#: google-typography.php:109
+msgid "Font Color"
+msgstr ""
+
+#: google-typography.php:109
+msgid "The color you'd like to use for this font."
+msgstr ""
+
+#: google-typography.php:109
+#: google-typography.php:110
+msgid "CSS Selectors"
+msgstr ""
+
+#: google-typography.php:109
+msgid "The HTML tags or CSS selectors you'd like this font to apply to (more info in the \"CSS Selectors\" help tab). You can specify multiple selectors separated by comma's. Ex: h1, #some_id, .some_class"
+msgstr ""
+
+#: google-typography.php:111
+msgid "CSS Selectors are used to hook your font rows into your actual website. Once you've added, customized, and defined CSS selectors for your fonts, Google Typography will automatically insert all the necessary CSS into your website."
+msgstr ""
+
+#: google-typography.php:112
+msgid "Here are some examples of the selectors you can use:"
+msgstr ""
+
+#: google-typography.php:113
+msgid "IDs"
+msgstr ""
+
+#: google-typography.php:113
+msgid "#selector"
+msgstr ""
+
+#: google-typography.php:113
+msgid "Classes:"
+msgstr ""
+
+#: google-typography.php:113
+msgid ".selector"
+msgstr ""
+
+#: google-typography.php:113
+msgid "HTML Tags"
+msgstr ""
+
+#: google-typography.php:113
+msgid "span"
+msgstr ""
+
+#: google-typography.php:114
+msgid "Example"
+msgstr ""
+
+#: google-typography.php:114
+msgid "#selector span.date"
+msgstr ""
+
+#: google-typography.php:142
+msgid "Settings"
+msgstr ""
+
+#: google-typography.php:228
+msgid "Google Typography"
+msgstr ""
+
+#: google-typography.php:229
+msgid "Loading Your Collections"
+msgstr ""
+
+#: google-typography.php:230
+msgid "Add New"
+msgstr ""
+
+#: google-typography.php:231
+msgid "Type in some text to preview..."
+msgstr ""
+
+#: google-typography.php:232
+msgid "Preview Background Color"
+msgstr ""
+
+#: google-typography.php:233
+msgid "Font family..."
+msgstr ""
+
+#: google-typography.php:234
+msgid "Variant..."
+msgstr ""
+
+#: google-typography.php:235
+msgid "Size..."
+msgstr ""
+
+#: google-typography.php:236
+msgid "CSS Selectors (h1, .some_class)"
+msgstr ""
+
+#: google-typography.php:237
+msgid "Delete"
+msgstr ""
+
+#: google-typography.php:238
+msgid "Save"
+msgstr ""
+
+#: google-typography.php:240
+msgid "Welcome to Google Typography"
+msgstr ""
+
+#: google-typography.php:241
+msgid "Get started in 3 steps. Not easy enough? "
+msgstr ""
+
+#: google-typography.php:241
+msgid "Watch the video tutorial &#x2192;"
+msgstr ""
+
+#: google-typography.php:242
+msgid "1. Pick A Font"
+msgstr ""
+
+#: google-typography.php:243
+msgid "Choose from any of the 600+ Google Fonts."
+msgstr ""
+
+#: google-typography.php:244
+msgid "2. Customize It"
+msgstr ""
+
+#: google-typography.php:245
+msgid "Pick a size, variant, color and more."
+msgstr ""
+
+#: google-typography.php:246
+msgid "3. Attach It"
+msgstr ""
+
+#: google-typography.php:247
+msgid "Attach your font to any CSS selector(s)."
+msgstr ""
+
