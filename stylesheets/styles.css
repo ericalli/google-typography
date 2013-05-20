@@ -253,3 +253,9 @@ footer {
     color:#444;
   }
 }
+img {
+	border: 1px solid #eaeaea;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
