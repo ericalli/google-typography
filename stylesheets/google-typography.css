@@ -68,7 +68,6 @@ div#google_typography { }
 					}
 				}
 	div#google_typography .template { display: none; }
-	div#google_typography .collections_wrap { overflow: hidden; width: 100%; }
 	div#google_typography .collections {
 		margin-top: 20px;
 	}

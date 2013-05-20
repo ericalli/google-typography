@@ -25,10 +25,12 @@
   -webkit-box-sizing: border-box;
   -khtml-box-sizing : border-box;
   box-sizing        : border-box;
+	display: none;
 }
 
 .chzn-container.chzn-with-drop .chzn-drop {
-  left: 0;
+	display: block;
+	left: 0;
 }
 
 /* @end */

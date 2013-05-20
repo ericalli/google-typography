@@ -333,9 +333,7 @@ class GoogleTypography {
 					
 				</div>
 				
-				<div class="collections_wrap">
-					<div class="collections"></div>
-				</div>
+				<div class="collections"></div>
 			</div>
 				
 EOT;

@@ -27,7 +27,7 @@
 			// Save and delete
 			collection.find(".save_collection").on("click", function() { saveCollections(collection, container); });
 			collection.find(".delete_collection").on("click", function() { 
-				if(confirm("Are you sure you wan't to delete this collection?")) {
+				if(confirm("Are you sure you want to delete this font?")) {
 					collection.remove(); 
 					saveCollections(collection, container, false);
 					if(container.find(".collections .collection").length == 0) {
