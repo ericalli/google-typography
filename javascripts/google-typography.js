@@ -144,6 +144,7 @@
 				fontSize			= $(this).find(".font_size").val();
 				fontColor			= $(this).find(".font_color").val();
 				cssSelectors	= $(this).find(".css_selectors").val();
+				isDefault			= $(this).attr("data-default");
         
 				collectionData[i] = {
 					uid: i+1,
@@ -153,7 +154,8 @@
 					font_variant: fontVariant, 
 					font_size: fontSize,
 					font_color: fontColor,
-					css_selectors: cssSelectors
+					css_selectors: cssSelectors,
+					default: isDefault
 				};
   
 				i++;
@@ -175,7 +177,7 @@
 		};
 		
 		loadCollection = function(values, collection) {
-			
+
 			collection.find(".preview_text").val(values.preview_text.replace("\\", ""));
 			collection.find(".preview_color li a[class="+values.preview_color+"]").trigger("click");
 			
@@ -195,6 +197,8 @@
 				.val(values.font_color)
 				.wpColorPicker('color', values.font_color);
 			collection.find(".css_selectors").val(values.css_selectors);
+			
+			collection.attr("data-default", values.default);
 			
 		};
     
@@ -244,6 +248,21 @@
 			container.find(".welcome").hide();
 		});
 		
+		// Reset collections
+		container.find(".reset_collections").on("click", function() {
+			if(confirm("Are you sure you want to reset back to the default collections? Note: You will lose any custom collections you've created.")) {
+				$.ajax({
+					url: ajaxurl, 
+					method: 'post',
+					data: {  'action' : 'reset_user_fonts' },
+					success: function(data) {
+						if(data.success == true) {
+							location.reload();
+						}
+					}
+				});
+			}
+		});
 	});
   
 })(jQuery);

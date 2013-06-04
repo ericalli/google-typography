@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Google Typography
-Plugin URI: http://github.com/ericalli/google-typography
+Plugin URI: http://projects.ericalli.com/google-typography/
 Description: A simple plugin that lets you use and customize (in real-time!) any fonts from Google Fonts on your existing site, all without writing a single line of code.
 Version: 1.0
 Author: Eric Alli
@@ -46,6 +46,7 @@ class GoogleTypography {
 			add_action('admin_enqueue_scripts', array(&$this, 'admin_scripts'));
 			add_action('wp_ajax_get_user_fonts',array(&$this,'ajax_get_user_fonts'));
 			add_action('wp_ajax_save_user_fonts',array(&$this,'ajax_save_user_fonts'));
+			add_action('wp_ajax_reset_user_fonts',array(&$this,'ajax_reset_user_fonts'));
 			add_action('wp_ajax_get_google_fonts',array(&$this,'ajax_get_google_fonts'));
 			add_action('wp_ajax_get_google_font_variants',array(&$this,'ajax_get_google_font_variants'));
 		} else{
@@ -228,6 +229,7 @@ class GoogleTypography {
 		$title								= __('Google Typography', 'google-typography');
 		$loading							= __('Loading Your Collections', 'google-typography');
 		$add_new        			= __('Add New', 'google-typography');
+		$reset        				= __('Reset', 'google-typography');
 		$preview_text   			= __('Type in some text to preview...', 'google-typography');
 		$preview_hint   			= __('Preview Background Color', 'google-typography');
 		$font_family_title  	= __('Font family...', 'google-typography');
@@ -245,6 +247,7 @@ class GoogleTypography {
 		$step_2_desc					= __('Pick a size, variant, color and more.', 'google-typography');
 		$step_3_title 				= __('3. Attach It', 'google-typography');
 		$step_3_desc					= __('Attach your font to any CSS selector(s).', 'google-typography');
+		$year									= date("Y");
 		
 		$fonts = $this->get_fonts();
 		$font_families = "";
@@ -258,6 +261,10 @@ class GoogleTypography {
 			$numbers .= "<option value=\"{$number}px\">{$number}px</option>";
 		}
 		
+		if(get_option("google_typography_default")) {
+			$reset_link = '<a href="javascript:;" class="add-new-h2 reset_collections">'.$reset.'</a>';
+		} else { $reset_link = ''; }
+		
 		echo <<<EOT
 			<div id="google_typography" class="wrap">
 							
@@ -265,6 +272,7 @@ class GoogleTypography {
 				<h2>
 					$title
 					<a href="javascript:;" class="add-new-h2 new_collection">$add_new</a>
+					$reset_link
 				</h2>
 				
 				<div class="loading">
@@ -380,6 +388,29 @@ EOT;
 		$collections = update_option('google_typography_collections', $collections);
 		
 		$response = json_encode( array( 'success' => true, 'collections' => $collections ) );
+		
+		header( "Content-Type: application/json" );
+		echo $response;
+		
+		exit;
+		
+	}
+	
+	/**
+	 * Function for resetting user font collections
+	 *
+	 *
+	 * @uses delete_option()
+	 * @uses json_encode()
+	 * @return JSON object with all user fonts
+	 *
+	 */
+	function ajax_reset_user_fonts() {
+		
+		delete_option('google_typography_default');
+		delete_option('google_typography_collections');
+		
+		$response = json_encode( array( 'success' => true ) );
 		
 		header( "Content-Type: application/json" );
 		echo $response;
@@ -515,10 +546,6 @@ EOT;
 	  return false;
 	}
 	
-	function add_defaults() {
-		
-	}
-	
 	/**
 	 * Enqueue admin styles and scripts
 	 *
@@ -551,3 +578,33 @@ EOT;
 }
 
 GoogleTypography::init();
+
+/**
+ * Function for registering default typography collections 
+ *
+ *
+ * @uses get_option()
+ * @uses update_option()
+ *
+ */
+function register_typography($collections) {
+
+	if(!get_option('google_typography_default')) {
+
+		$defaults = array();
+		delete_option('google_typography_collections');
+
+		foreach($collections as $key => $collection) {
+			array_push($defaults, 
+				array_merge(
+					array('default' => true), 
+					$collection
+				)
+			);
+		}
+ 
+		update_option('google_typography_default', true);
+		update_option('google_typography_collections', $defaults);
+
+	} 
+}

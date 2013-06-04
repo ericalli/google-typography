@@ -186,6 +186,14 @@ div#google_typography { }
 	    transition: all 0.2s ease-in; 
 		}
 		div#google_typography .font_options a.delete_collection:hover { background: #f00; color: #fff; }
+		div#google_typography .reset_collections {
+			color: #f00; 
+		}
+		div#google_typography .reset_collections:hover {
+			background: #f00; 
+			color: #fff;
+			text-shadow: none;
+		}
 	div#google_typography .css_selectors {
 		-webkit-transition: all 200ms linear;
 	  -moz-transition: all 200ms linear;
@@ -213,6 +221,11 @@ div#google_typography .loading {
 			background: url('../images/spinner@2x.gif') no-repeat;
 			background-size: 34px 34px;
 		}
+	}
+div#google_typography .footer {}
+	div#google_typography .footer p {
+		color: #999;
+		font-size: 11px;
 	}
 /*--------------------------------------------
 Misc
