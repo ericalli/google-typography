@@ -250,7 +250,7 @@
 		
 		// Reset collections
 		container.find(".reset_collections").on("click", function() {
-			if(confirm("Are you sure you want to reset back to the default collections? Note: You will lose any custom collections you've created.")) {
+			if(confirm("Are you sure you want to revert back to the default collections? Note: You will lose any custom collections you've created.")) {
 				$.ajax({
 					url: ajaxurl, 
 					method: 'post',
