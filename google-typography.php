@@ -104,7 +104,7 @@ class GoogleTypography {
 		$adding_title					= __('Adding A Collection', 'google-typography');
 		$adding_content				= '<p>'.__('To add a new font for use on your site. Click the "Add New" button on the top left of the page near the "Google Typography" title.', 'google-typography').'</p>';
 		$adding_content			 .= '<p>'.__('Once added, a new font row will appear on the page below. Next you can continue to customize your font (more info in the "Customizing" help tab).', 'google-typography').'</p>';
-		$adding_content			 .= '<p><a href="http://youtube.com/">'.__('Watch The Video Tutorial &rarr;', 'google-typography').'</a></p>';
+		$adding_content			 .= '<p><a href="https://vimeo.com/67957799" target="_blank">'.__('Watch The Video Tutorial &rarr;', 'google-typography').'</a></p>';
 		$customizing_title 		= __('Customizing');
 		$customizing_content	= '<p>'.__('Customizing fonts is easy; after adding a new font row you can then customize the following font attributes:', 'google-typography').'</p>';
 		$customizing_content .= '<ul><li><b>'.__('Preview Text', 'google-typography').'</b> - '.__('Used for live previewing your changes. This text does not appear anywhere on your website.', 'google-typography').'</li><li><b>Preview Background Color</b> - Allows you to swap between light and dark backgrounds when previewing this font.</li><li><b>'.__('Font Family', 'google-typography').'</b> - '.__('The font family to use for this font. Choose from a real-time list of all available Google Fonts.', 'google-typography').'</li><li><b>'.__('Font Variant', 'google-typography').'</b> - '.__('The variant to use for this font. Note: Each font has it\'s own variant options.', 'google-typography').'</li><li><b>'.__('Font Size', 'google-typography').'</b> - '.__('The size you would like this font to be.', 'google-typography').'</li><li><b>'.__('Font Color', 'google-typography').'</b> - '.__('The color you\'d like to use for this font.', 'google-typography').'</li><li><b>'.__('CSS Selectors', 'google-typography').'</b> - '.__('The HTML tags or CSS selectors you\'d like this font to apply to (more info in the "CSS Selectors" help tab). You can specify multiple selectors separated by comma\'s. Ex: h1, #some_id, .some_class', 'google-typography').'</li></ul>';
@@ -240,7 +240,7 @@ class GoogleTypography {
 		$save_button_text			= __('Save', 'google-typography');
 		
 		$welcome_title 				= __('Welcome to Google Typography', 'google-typography');
-		$welcome_subtitle			= __('Get started in 3 steps. Not easy enough? ', 'google-typography').'<a href="">'.__('Watch the video tutorial &#x2192;', 'google-typography').'</a>';
+		$welcome_subtitle			= __('Get started in 3 steps. Not easy enough? ', 'google-typography').'<a href="https://vimeo.com/67957799" target="_blank">'.__('Watch the video tutorial &#x2192;', 'google-typography').'</a>';
 		$step_1_title 				= __('1. Pick A Font', 'google-typography');
 		$step_1_desc					= __('Choose from any of the 600+ Google Fonts.', 'google-typography');
 		$step_2_title 				= __('2. Customize It', 'google-typography');

@@ -12,7 +12,7 @@ A simple plugin that lets you use and customize (in real-time!) any fonts from G
 
 ==Description==
 
-The Google Typography plugins allows you to use any [Google Fonts](http://www.google.com/fonts) for any text on your existing website without writing a single line of code. In the Appearance > Typography settings page, simply add and customize as many fonts as you'd like, then apply it to any existing HTML tag or CSS selector.
+The Google Typography plugins allows you to use any [Google Font](http://www.google.com/fonts) for any text on your existing website without writing a single line of code. In the Appearance > Typography settings page, simply add and customize as many fonts as you'd like, then apply it to any existing HTML tag or CSS selector.
 
 ==Frequently Asked Questions==
 
