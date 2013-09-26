@@ -140,7 +140,7 @@ class GoogleTypography {
 	 */
 	function plugin_link($links, $file) {
 		if ( $file == 'google-typography/google-typography.php' ) {
-			$links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'themes.php?page=typography' ), __( 'Settings', 'plugin_domain' ) );
+			$links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'themes.php?page=typography' ), __( 'Settings', 'google-typography' ) );
 		}
 		return $links;
 	}
