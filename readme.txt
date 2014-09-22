@@ -3,8 +3,8 @@
 Contributors: ericalli
 Tags: fonts, fonts, typography, font, free fonts, google, google fonts, font manager, type
 Requires at least: 3.5
-Tested up to: 3.5.1
-Stable tag: 1.0
+Tested up to: 4.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,12 @@ It can also be installed manually:
 3. Amazing typography, all without writing a single line of code.
 
 ==Changelog==
+
+= 1.1 =
+
+* Add ability to use fonts over SSL
+* Allow for font size, color and selectors to be optional
+* Cleanup and optimizations
 
 = 1.0 =
 
