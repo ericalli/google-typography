@@ -50,7 +50,8 @@ class GoogleTypography {
 			add_action("wp_ajax_get_google_fonts", array(&$this,"ajax_get_google_fonts"));
 			add_action("wp_ajax_get_google_font_variants", array(&$this,"ajax_get_google_font_variants"));
 		} else{
-			add_action("wp_head", array(&$this,"build_frontend"));
+			add_action("wp_head", array(&$this, "build_frontend"));
+			add_action("wp_enqueue_scripts", array(&$this, "enqueue_frontend"));
 		}
 
 	}
@@ -155,15 +156,12 @@ class GoogleTypography {
 	function build_frontend() {
 		
 		$collections = get_option("google_typography_collections");
-		
-		$import_fonts = array();
+	
 		$font_styles = "";
 
 		if($collections) {
 		
 			foreach($collections as $collection) {
-
-				array_push($import_fonts, array("font_family" => $collection["font_family"], "font_variant" => $collection["font_variant"]));
 
 				if(isset($collection["css_selectors"]) && $collection["css_selectors"] != "") {
 
@@ -181,17 +179,37 @@ class GoogleTypography {
 				}
 			}
 			
+			$frontend = "\n<style type=\"text/css\">\n";
+			$frontend .= $font_styles;
+			$frontend .= "</style>\n";
+		
+			echo $frontend;
+		
+		}
+		
+	}
+
+	/**
+	 * Enqueue the frontend scripts
+	 *
+	 * @uses get_option()
+	 * @uses GoogleTypography::stringify_fonts()
+	 *
+	 */
+	function enqueue_frontend() {
+		
+		$collections = get_option("google_typography_collections");
+		
+		$import_fonts = array();
+
+		if($collections) {
+		
+			foreach($collections as $collection) {
+				array_push($import_fonts, array("font_family" => $collection["font_family"], "font_variant" => $collection["font_variant"]));
+			}
+			
 			if(!empty($import_fonts)) {
-
-				$import_url = '@import url(' . $this->fonts_url . $this->stringify_fonts($import_fonts) .');';
-			
-				$frontend = "\n<style type=\"text/css\">\n";
-				$frontend .= $import_url."\n";
-				$frontend .= $font_styles;
-				$frontend .= "</style>\n";
-			
-				echo $frontend;
-
+				wp_enqueue_style("google-typography-font", $this->fonts_url . $this->stringify_fonts($import_fonts), array(), null);
 			}
 		
 		}
@@ -587,7 +605,7 @@ EOT;
  */
 if(class_exists("GoogleTypography")) {
     // instantiate the plugin class
-    $google_typography = GoogleTypography::init();
+    $google_typography = new GoogleTypography();
 }
 
 /**
