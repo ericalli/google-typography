@@ -1,3 +1,7 @@
+#wpbody-content{
+	overflow: visible !important;
+}
+
 div#google_typography { }
 	div#google_typography .help_hint {
 		width: 132px;

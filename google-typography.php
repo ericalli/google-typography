@@ -484,7 +484,7 @@ EOT;
 
 		if (false === $fonts)	{
 
-			$request = wp_remote_get($this->api_url);
+			$request = wp_remote_get($this->api_url, array('sslverify' => false));
 
 			if(is_wp_error($request)) {
 
@@ -568,6 +568,12 @@ EOT;
 		// Grab the plugin version
 		$plugin_data = get_plugin_data(__FILE__);
 		
+		global $plugin_screen;
+		
+		$screen = get_current_screen();
+
+		if ($screen->id != $plugin_screen)
+			 return;
 		//Javascripts
 		wp_enqueue_script("google-webfont", "https://ajax.googleapis.com/ajax/libs/webfont/1.4.2/webfont.js", false, $plugin_data["Version"], true);
 		wp_enqueue_script("google-typography", plugin_dir_url(__FILE__) . "javascripts/google-typography.js", array("jquery", "jquery-ui-sortable", "wp-color-picker"), $plugin_data["Version"], true);
