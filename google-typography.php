@@ -168,13 +168,13 @@ class GoogleTypography {
 				if(isset($collection["css_selectors"]) && $collection["css_selectors"] != "") {
 
 					$font_styles .= $collection["css_selectors"] . '{ ';
-					$font_styles .= 'font-family: "' . $collection['font_family'] . '";';
-					$font_styles .= 'font-weight: ' . $collection['font_variant'] . ';';
+					$font_styles .= 'font-family: "' . $collection['font_family'] . '"; ';
+					$font_styles .= 'font-weight: ' . $collection['font_variant'] . '; ';
 					if($collection['font_size']) {
-						$font_styles .= 'font-size: ' . $collection['font_size'] . ';';
+						$font_styles .= 'font-size: ' . $collection['font_size'] . '; ';
 					}
 					if($collection['font_color']) {
-						$font_styles .= 'color: ' . $collection['font_color'] . ';';
+						$font_styles .= 'color: ' . $collection['font_color'] . '; ';
 					}
 					$font_styles .= " }\n";
 			
