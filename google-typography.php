@@ -23,7 +23,7 @@ class GoogleTypography {
 	/**
 	 * @var $fonts_url	The google web font URL
 	 */
-	protected $fonts_url = "http://fonts.googleapis.com/css?family=";
+	protected $fonts_url = "//fonts.googleapis.com/css?family=";
 	
 	/**
 	 * Constructor for the GoogleTypography class
