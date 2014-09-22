@@ -77,7 +77,7 @@ class GoogleTypography {
 	function admin_menu() {
 		global $plugin_screen;
 		
-		$plugin_screen = add_submenu_page("themes.php", "Typography", "Typography", "manage_options", "typography", array(&$this, "options_ui"));
+		$plugin_screen = add_submenu_page("themes.php", "Typography", "Typography", "edit_theme_options", "typography", array(&$this, "options_ui"));
 		
 		add_filter("plugin_action_links", array(&$this, "plugin_link"), 10, 2);
 		add_action("load-".$plugin_screen, array(&$this, "help_tab"));
