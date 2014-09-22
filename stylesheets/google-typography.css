@@ -158,8 +158,9 @@ div#google_typography { }
 	    	transition: all 0.2s ease-in;
 		}
 		div#google_typography .collection.current .font_options .right_col { opacity: 1; }
-			div#google_typography .font_options .font_family       { width: 210px; }
+			div#google_typography .font_options .font_family       { width: 200px; }
 			div#google_typography .font_options .font_variant      { width: 105px; }
+			div#google_typography .font_options .font_subset       { width: 105px; }
 			div#google_typography .font_options .font_size         { width: 105px; }
 			div#google_typography .font_options .wp-color-result { 
 			  height: 30px;

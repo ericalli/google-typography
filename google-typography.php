@@ -48,7 +48,7 @@ class GoogleTypography {
 			add_action("wp_ajax_save_user_fonts", array(&$this,"ajax_save_user_fonts"));
 			add_action("wp_ajax_reset_user_fonts", array(&$this,"ajax_reset_user_fonts"));
 			add_action("wp_ajax_get_google_fonts", array(&$this,"ajax_get_google_fonts"));
-			add_action("wp_ajax_get_google_font_variants", array(&$this,"ajax_get_google_font_variants"));
+			add_action("wp_ajax_get_google_font_options", array(&$this,"ajax_get_google_font_options"));
 		} else{
 			add_action("wp_head", array(&$this, "build_frontend"));
 			add_action("wp_enqueue_scripts", array(&$this, "enqueue_frontend"));
@@ -194,7 +194,13 @@ class GoogleTypography {
 		if($collections) {
 		
 			foreach($collections as $collection) {
-				array_push($import_fonts, array("font_family" => $collection["font_family"], "font_variant" => $collection["font_variant"]));
+				array_push($import_fonts, 
+					array(
+						"font_family" => $collection["font_family"], 
+						"font_variant" => $collection["font_variant"],
+						"font_subset" => $collection["font_subset"]
+					)
+				);
 			}
 			
 			if(!empty($import_fonts)) {
@@ -218,19 +224,21 @@ class GoogleTypography {
 		$array = array_map('unserialize', array_unique(array_map('serialize', $array)));
 		
 		$fonts = array();
+		$subsets = array();
 		
 		foreach($array as $font){
 			$parts = '';
 			
-			$parts .= str_replace(" ", "+", $font['font_family']);
-			if(isset($font['font_variant'])) {
-				$parts .= ':' . $font['font_variant'];
+			$parts .= str_replace(" ", "+", $font["font_family"]);
+			if(isset($font["font_variant"])) {
+				$parts .= ":" . $font["font_variant"];
 			}
 			
 			$fonts[] = $parts;
+			$subsets[] = $font["font_subset"];
 		}
-		
-		return implode('|', $fonts);
+
+		return implode('|', $fonts) . "&subset=" . join(",", $subsets);
 	}
 	
 	/**
@@ -249,6 +257,7 @@ class GoogleTypography {
 		$preview_hint        = __("Preview Background Color", "google-typography");
 		$font_family_title   = __("Font family...", "google-typography");
 		$font_variant_title  = __("Variant...", "google-typography");
+		$font_subset_title   = __("Subset...", "google-typography");
 		$font_size_title     = __("Size...", "google-typography");
 		$css_selectors_title = __("CSS Selectors (h1, .some_class)", "google-typography");
 		$delete_button_text  = __("Delete", "google-typography");
@@ -337,6 +346,9 @@ class GoogleTypography {
 								</select>
 								<select class="font_variant">
 									<option value="">$font_variant_title</option>
+								</select>
+								<select class="font_subset">
+									<option value="">$font_subset_title</option>
 								</select>
 								<select class="font_size">
 									<option value="">$font_size_title</option>
@@ -461,15 +473,20 @@ EOT;
 	 * @return JSON object with font data
 	 *
 	 */
-	function ajax_get_google_font_variants() { 
+	function ajax_get_google_font_options() { 
 
 		$fonts = $this->get_fonts();
 		$font_family = $_GET["font_family"];
 		
 		$result = $this->multidimensional_search($fonts, array("family" => $font_family));
+
+		$json = array(
+			"variants" => $result["variants"],
+			"subsets"  => $result["subsets"]
+		);
 		
 		header("Content-Type: application/json");
-		echo json_encode($result["variants"]);
+		echo json_encode($json);
 		
 		exit;
 	}
@@ -524,7 +541,12 @@ EOT;
 						}
 					}
 
-					$fonts[] = array("uid" => $i, "family" => $item["family"], "variants" => $variants);
+					$subsets = array();
+					foreach ($item['subsets'] as $subset) {
+						$subsets[] = $subset;
+					}
+
+					$fonts[] = array("uid" => $i, "family" => $item["family"], "variants" => $variants, "subsets" => $subsets);
 
 				}
 				

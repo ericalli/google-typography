@@ -19,7 +19,7 @@
 			});
       
 			// Font attributes
-			collection.find(".font_family").on("change", function(e, variant) { previewFontFamily($(this), collection, preview, variant); });
+			collection.find(".font_family").on("change", function(e, variant, subset) { previewFontFamily($(this), collection, preview, variant, subset); });
 			collection.find(".font_variant").on("change", function() { previewFontVariant($(this), preview); });
 			collection.find(".font_size").change(function() { previewFontSize($(this), preview); });
 			collection.find(".preview_color li a").on("click", function() { previewBackgroundColor($(this), collection); });
@@ -54,11 +54,11 @@
 			
 		};
     
-		previewFontFamily = function(elem, collection, preview, variant) {
+		previewFontFamily = function(elem, collection, preview, variant, subset) {
 
 			var font = $(elem).val();
 
-			getFontVariants(font, collection, variant, preview);
+			getFontVariants(font, collection, variant, subset, preview);
 			
 		};
     
@@ -84,29 +84,47 @@
       
 		};
     
-		getFontVariants = function(font, collection, selected, preview) {
+		getFontVariants = function(font, collection, selected_variant, selected_subset, preview) {
 
 			var variants = collection.find(".font_variant");
+			var subsets = collection.find(".font_subset");
       
 			var variant_array = [];
+			var subset_array = [];
 
 			jQuery.ajax({
 				url: ajaxurl,
 				data: {
-					'action' : 'get_google_font_variants',
+					'action' : 'get_google_font_options',
 					'font_family' : font
 				},
 				success: function(data) {
+
+					var variant_list = data.variants;
+					var subset_list = data.subsets;
+
 					variants.find("option").remove();
-    			for(i = 0; i < data.length; ++i) {
-						if(selected == data[i]) { 
+					subsets.find("option").remove();
+
+    				for(i = 0; i < variant_list.length; ++i) {
+						if(selected_variant == variant_list[i]) { 
 							var is_selected = "selected"; 
 						} else { 
 							var is_selected = ""; 
 						}
-						variants.append('<option value="'+data[i]+'" '+is_selected+'>'+data[i]+'</option>');
-						variant_array.push(data[i]);
-    			}
+						variants.append('<option value="'+variant_list[i]+'" '+is_selected+'>'+variant_list[i]+'</option>');
+						variant_array.push(variant_list[i]);
+    				}
+
+					for(i = 0; i < subset_list.length; ++i) {
+						if(selected_subset == subset_list[i]) { 
+							var is_selected = "selected"; 
+						} else { 
+							var is_selected = "";
+						}
+						subsets.append('<option value="'+subset_list[i]+'" '+is_selected+'>'+subset_list[i]+'</option>');
+						subset_array.push(subset_list[i]);
+					}
 
 					WebFont.load({
 						google: {
@@ -120,7 +138,14 @@
 						}
 					});
 
+					if(typeof selected_subset == "undefined") {
+						if(subsets.find("option[value='latin']").length > 0) {
+							subsets.find("option[value='latin']").attr("selected", "selected");
+						}
+					}
+
 					variants.trigger("change").trigger("liszt:updated");
+					subsets.trigger("change").trigger("liszt:updated");
     		}
     	});
       
@@ -141,6 +166,7 @@
 				previewColor = $(this).find(".preview_color li.current a").attr("class");
 				fontFamily   = $(this).find(".font_family").val();
 				fontVariant  = $(this).find(".font_variant").val();
+				fontSubset   = $(this).find(".font_subset").val();
 				fontSize     = $(this).find(".font_size").val();
 				fontColor    = $(this).find(".font_color").val();
 				cssSelectors = $(this).find(".css_selectors").val();
@@ -152,6 +178,7 @@
 					preview_color : previewColor,
 					font_family   : fontFamily,
 					font_variant  : fontVariant, 
+					font_subset   : fontSubset, 
 					font_size     : fontSize,
 					font_color    : fontColor,
 					css_selectors : cssSelectors,
@@ -184,7 +211,7 @@
 			if(values.font_family) {
 				collection.find(".font_family option[value='"+values.font_family+"']")
 					.attr("selected", "selected")
-					.trigger("change", [values.font_variant])
+					.trigger("change", [values.font_variant, values.font_subset])
 					.trigger("liszt:updated");
 			}
 				
