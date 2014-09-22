@@ -55,17 +55,6 @@ class GoogleTypography {
 		}
 
 	}
-	
-	function &init() {
-		static $instance = false;
-
-		if ( !$instance ) {
-			$instance = new GoogleTypography();
-		}
-
-		return $instance;
-	}
-	
 
 	/**
 	 * Initialize plugin for localization
@@ -586,7 +575,7 @@ EOT;
 		// Grab the plugin version
 		$plugin_data = get_plugin_data(__FILE__);
 		
-		//Javascripts
+		// Javascripts
 		wp_enqueue_script("google-webfont", "https://ajax.googleapis.com/ajax/libs/webfont/1.4.2/webfont.js", false, $plugin_data["Version"], true);
 		wp_enqueue_script("google-typography", plugin_dir_url(__FILE__) . "javascripts/google-typography.js", array("jquery", "jquery-ui-sortable", "wp-color-picker"), $plugin_data["Version"], true);
 		wp_enqueue_script("chosen", plugin_dir_url(__FILE__) . "javascripts/jquery.chosen.js", array("jquery"), $plugin_data["Version"], true);
