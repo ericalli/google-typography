@@ -79,9 +79,9 @@ div#google_typography { }
 			background-color: #fff;
 			margin-bottom: 20px;
 			-webkit-transition: box-shadow 0.2s ease-in;  
-	    -moz-transition: box-shadow 0.2s ease-in;  
-	    -o-transition: box-shadow 0.2s ease-in;  
-	    transition: box-shadow 0.2s ease-in;
+	    	-moz-transition: box-shadow 0.2s ease-in;  
+	    	-o-transition: box-shadow 0.2s ease-in;  
+	    	transition: box-shadow 0.2s ease-in;
 			cursor: move;
 		}
 		div#google_typography .collection.current {
@@ -108,6 +108,9 @@ div#google_typography { }
 				border: 0;
 				padding: 0;
 				width: 98%;
+				-webkit-box-shadow: none !important;
+				-moz-box-shadow: none !important;
+				box-shadow: none !important;
 			}
 				div#google_typography .font_preview input:focus { 
 					-webkit-box-shadow: none;
@@ -150,9 +153,9 @@ div#google_typography { }
 			float: right;
 			opacity: 0;
 			-webkit-transition: all 0.2s ease-in;  
-	    -moz-transition: all 0.2s ease-in;  
-	    -o-transition: all 0.2s ease-in;  
-	    transition: all 0.2s ease-in;
+	    	-moz-transition: all 0.2s ease-in;  
+	    	-o-transition: all 0.2s ease-in;  
+	    	transition: all 0.2s ease-in;
 		}
 		div#google_typography .collection.current .font_options .right_col { opacity: 1; }
 			div#google_typography .font_options .font_family       { width: 210px; }
@@ -181,9 +184,9 @@ div#google_typography { }
 			border-bottom: 1px solid; 
 			padding: 1px 2px;
 			-webkit-transition: all 0.2s ease-in;  
-	    -moz-transition: all 0.2s ease-in;  
-	    -o-transition: all 0.2s ease-in;  
-	    transition: all 0.2s ease-in; 
+	    	-moz-transition: all 0.2s ease-in;  
+	    	-o-transition: all 0.2s ease-in;  
+	    	transition: all 0.2s ease-in; 
 		}
 		div#google_typography .font_options a.delete_collection:hover { background: #f00; color: #fff; }
 		div#google_typography .reset_collections {
@@ -196,7 +199,7 @@ div#google_typography { }
 		}
 	div#google_typography .css_selectors {
 		-webkit-transition: all 200ms linear;
-	  -moz-transition: all 200ms linear;
+	  	-moz-transition: all 200ms linear;
 		border: none;
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 0 rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.1) inset;
 	}

@@ -3,7 +3,7 @@
 Plugin Name: Google Typography
 Plugin URI: http://projects.ericalli.com/google-typography/
 Description: A simple plugin that lets you use and customize (in real-time!) any fonts from Google Fonts on your existing site, all without writing a single line of code.
-Version: 1.0
+Version: 1.1
 Author: Eric Alli
 Author URI: http://ericalli.com
 */
@@ -37,20 +37,20 @@ class GoogleTypography {
 	 *
 	 */	
 	function __construct() {
-		register_activation_hook(__FILE__, array(&$this, 'get_fonts' ));
+		register_activation_hook(__FILE__, array(&$this, "get_fonts"));
 		
-		add_action('init', array(&$this,'localization_setup'));
+		add_action("init", array(&$this,"localization_setup"));
 		
 		if ( is_admin() ){
-			add_action('admin_menu', array(&$this, 'admin_menu'));
-			add_action('admin_enqueue_scripts', array(&$this, 'admin_scripts'));
-			add_action('wp_ajax_get_user_fonts',array(&$this,'ajax_get_user_fonts'));
-			add_action('wp_ajax_save_user_fonts',array(&$this,'ajax_save_user_fonts'));
-			add_action('wp_ajax_reset_user_fonts',array(&$this,'ajax_reset_user_fonts'));
-			add_action('wp_ajax_get_google_fonts',array(&$this,'ajax_get_google_fonts'));
-			add_action('wp_ajax_get_google_font_variants',array(&$this,'ajax_get_google_font_variants'));
+			add_action("admin_menu", array(&$this, "admin_menu"));
+			add_action("admin_enqueue_scripts", array(&$this, "admin_scripts"));
+			add_action("wp_ajax_get_user_fonts", array(&$this,"ajax_get_user_fonts"));
+			add_action("wp_ajax_save_user_fonts", array(&$this,"ajax_save_user_fonts"));
+			add_action("wp_ajax_reset_user_fonts", array(&$this,"ajax_reset_user_fonts"));
+			add_action("wp_ajax_get_google_fonts", array(&$this,"ajax_get_google_fonts"));
+			add_action("wp_ajax_get_google_font_variants", array(&$this,"ajax_get_google_font_variants"));
 		} else{
-			add_action('wp_head',array(&$this,'build_frontend'));
+			add_action("wp_head", array(&$this,"build_frontend"));
 		}
 
 	}
@@ -73,7 +73,7 @@ class GoogleTypography {
 	 *
 	 */
 	function localization_setup() {
-		load_plugin_textdomain('google-typography', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+		load_plugin_textdomain("google-typography", false, dirname(plugin_basename( __FILE__ )) . "/languages/");
 	}
 	
 	/**
@@ -87,10 +87,10 @@ class GoogleTypography {
 	function admin_menu() {
 		global $plugin_screen;
 		
-		$plugin_screen = add_submenu_page( 'themes.php', 'Typography', 'Typography', 'manage_options', 'typography', array(&$this, 'options_ui'));
+		$plugin_screen = add_submenu_page("themes.php", "Typography", "Typography", "manage_options", "typography", array(&$this, "options_ui"));
 		
-		add_filter('plugin_action_links', array(&$this, 'plugin_link'), 10, 2);
-		add_action('load-'.$plugin_screen, array(&$this, 'help_tab'));
+		add_filter("plugin_action_links", array(&$this, "plugin_link"), 10, 2);
+		add_action("load-".$plugin_screen, array(&$this, "help_tab"));
 	}
 	
 	function help_tab() {
@@ -101,35 +101,35 @@ class GoogleTypography {
 		if ($screen->id != $plugin_screen)
 		    return;
 		
-		$adding_title					= __('Adding A Collection', 'google-typography');
-		$adding_content				= '<p>'.__('To add a new font for use on your site. Click the "Add New" button on the top left of the page near the "Google Typography" title.', 'google-typography').'</p>';
-		$adding_content			 .= '<p>'.__('Once added, a new font row will appear on the page below. Next you can continue to customize your font (more info in the "Customizing" help tab).', 'google-typography').'</p>';
-		$adding_content			 .= '<p><a href="https://vimeo.com/67957799" target="_blank">'.__('Watch The Video Tutorial &rarr;', 'google-typography').'</a></p>';
-		$customizing_title 		= __('Customizing', 'google-typography');
-		$customizing_content	= '<p>'.__('Customizing fonts is easy; after adding a new font row you can then customize the following font attributes:', 'google-typography').'</p>';
-		$customizing_content .= '<ul><li><b>'.__('Preview Text', 'google-typography').'</b> - '.__('Used for live previewing your changes. This text does not appear anywhere on your website.', 'google-typography').'</li><li><b>Preview Background Color</b> - Allows you to swap between light and dark backgrounds when previewing this font.</li><li><b>'.__('Font Family', 'google-typography').'</b> - '.__('The font family to use for this font. Choose from a real-time list of all available Google Fonts.', 'google-typography').'</li><li><b>'.__('Font Variant', 'google-typography').'</b> - '.__('The variant to use for this font. Note: Each font has it\'s own variant options.', 'google-typography').'</li><li><b>'.__('Font Size', 'google-typography').'</b> - '.__('The size you would like this font to be.', 'google-typography').'</li><li><b>'.__('Font Color', 'google-typography').'</b> - '.__('The color you\'d like to use for this font.', 'google-typography').'</li><li><b>'.__('CSS Selectors', 'google-typography').'</b> - '.__('The HTML tags or CSS selectors you\'d like this font to apply to (more info in the "CSS Selectors" help tab). You can specify multiple selectors separated by comma\'s. Ex: h1, #some_id, .some_class', 'google-typography').'</li></ul>';
-		$selectors_title 			= __('CSS Selectors', 'google-typography');
-		$selectors_content		= '<p>' . __('CSS Selectors are used to hook your font rows into your actual website. Once you\'ve added, customized, and defined CSS selectors for your fonts, Google Typography will automatically insert all the necessary CSS into your website.', 'google-typography') . '</p>';
-		$selectors_content		= '<p>' . __('Here are some examples of the selectors you can use:', 'google-typography') . '</p>';
-		$selectors_content	 .= '<ul><li><b>'.__('IDs', 'google-typography').':</b> '.__('#selector', 'google-typography').'</li><li><b>'.__('Classes:', 'google-typography').':</b> '.__('.selector', 'google-typography').'</li><li><b>'.__('HTML Tags', 'google-typography').':</b> '.__('span', 'google-typography').'</ul>';      
-		$selectors_content	 .= '<p><b>'.__('Example', 'google-typography').':</b> '.__('#selector span.date', 'google-typography').'</p>';
+		$adding_title        = __("Adding A Collection", "google-typography");
+		$adding_content      = "<p>" . __("To add a new font for use on your site. Click the \"Add New\" button on the top left of the page near the \"Google Typography\" title.", "google-typography") . "</p>";
+		$adding_content      .= "<p>" . __("Once added, a new font row will appear on the page below. Next you can continue to customize your font (more info in the \"Customizing\" help tab).", "google-typography") . "</p>";
+		$adding_content      .= "<p><a href=\"https://vimeo.com/67957799\" target=\"_blank\">" . __("Watch The Video Tutorial &rarr;", "google-typography") . "</a></p>";
+		$customizing_title   = __("Customizing", "google-typography");
+		$customizing_content = "<p>" . __("Customizing fonts is easy; after adding a new font row you can then customize the following font attributes:", "google-typography") . "</p>";
+		$customizing_content .= "<ul><li><b>" . __("Preview Text", "google-typography") . "</b> - " . __("Used for live previewing your changes. This text does not appear anywhere on your website.", "google-typography") . "</li><li><b>Preview Background Color</b> - Allows you to swap between light and dark backgrounds when previewing this font.</li><li><b>" . __("Font Family", "google-typography") . "</b> - " . __("The font family to use for this font. Choose from a real-time list of all available Google Fonts.", "google-typography") . "</li><li><b>" . __("Font Variant", "google-typography") . "</b> - " . __("The variant to use for this font. Note: Each font has it\"s own variant options.", "google-typography") . "</li><li><b>" . __("Font Size", "google-typography") . "</b> - " . __("The size you would like this font to be.", "google-typography") . "</li><li><b>" . __("Font Color", "google-typography") . "</b> - " . __("The color you\"d like to use for this font.", "google-typography") . "</li><li><b>" . __("CSS Selectors", "google-typography") . "</b> - " . __("The HTML tags or CSS selectors you\"d like this font to apply to (more info in the \"CSS Selectors\" help tab). You can specify multiple selectors separated by comma\"s. Ex: h1, #some_id, .some_class", "google-typography") . "</li></ul>";
+		$selectors_title     = __("CSS Selectors", "google-typography");
+		$selectors_content   = "<p>" . __("CSS Selectors are used to hook your font rows into your actual website. Once you\"ve added, customized, and defined CSS selectors for your fonts, Google Typography will automatically insert all the necessary CSS into your website.", "google-typography") . "</p>";
+		$selectors_content   = "<p>" . __("Here are some examples of the selectors you can use:", "google-typography") . "</p>";
+		$selectors_content   .= "<ul><li><b>" . __("IDs", "google-typography") . ":</b> " . __("#selector", "google-typography") . "</li><li><b>" . __("Classes:", "google-typography") . ":</b> " . __(".selector", "google-typography") . "</li><li><b>" . __("HTML Tags", "google-typography") . ":</b> " . __("span", "google-typography") . "</ul>";      
+		$selectors_content   .= "<p><b>" . __("Example", "google-typography") . ":</b> " . __("#selector span.date", "google-typography") . "</p>";
 		
 		$screen->add_help_tab(array(
-		    'id'	=> 'adding',
-		    'title'	=> $adding_title,
-		    'content'	=> $adding_content
+		    "id"	=> "adding",
+		    "title"	=> $adding_title,
+		    "content"	=> $adding_content
 		));
 		
 		$screen->add_help_tab(array(
-		    'id'	=> 'customizing',
-		    'title'	=> $customizing_title,
-		    'content'	=> $customizing_content
+		    "id"	=> "customizing",
+		    "title"	=> $customizing_title,
+		    "content"	=> $customizing_content
 		));
 		
 		$screen->add_help_tab(array(
-		    'id'	=> 'selectors',
-		    'title'	=> $selectors_title,
-		    'content'	=> $selectors_content
+		    "id"	=> "selectors",
+		    "title"	=> $selectors_title,
+		    "content"	=> $selectors_content
 		));
 
 	}
@@ -139,8 +139,8 @@ class GoogleTypography {
 	 *
 	 */
 	function plugin_link($links, $file) {
-		if ( $file == 'google-typography/google-typography.php' ) {
-			$links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'themes.php?page=typography' ), __( 'Settings', 'google-typography' ) );
+		if ($file == "google-typography/google-typography.php") {
+			$links["settings"] = sprintf("<a href=\"%s\"> %s </a>", admin_url("themes.php?page=typography"), __("Settings", "google-typography"));
 		}
 		return $links;
 	}
@@ -154,37 +154,45 @@ class GoogleTypography {
 	 */
 	function build_frontend() {
 		
-		$collections = get_option('google_typography_collections');
+		$collections = get_option("google_typography_collections");
 		
 		$import_fonts = array();
-		$font_styles = '';
+		$font_styles = "";
 
 		if($collections) {
 		
-			foreach($collections as $collection){
-			
-				if(isset($collection['css_selectors']) && $collection['css_selectors'] != "") {
-				
-					array_push($import_fonts, array('font_family' => $collection['font_family'], 'font_variant' => $collection['font_variant']));
+			foreach($collections as $collection) {
 
-					$font_styles .= $collection['css_selectors'] . '{ ';
+				array_push($import_fonts, array("font_family" => $collection["font_family"], "font_variant" => $collection["font_variant"]));
+
+				if(isset($collection["css_selectors"]) && $collection["css_selectors"] != "") {
+
+					$font_styles .= $collection["css_selectors"] . '{ ';
 					$font_styles .= 'font-family: "' . $collection['font_family'] . '";';
 					$font_styles .= 'font-weight: ' . $collection['font_variant'] . ';';
-					$font_styles .= 'font-size: ' . $collection['font_size'] . ';';
-					$font_styles .= 'color: ' . $collection['font_color'] . ';';
+					if($collection['font_size']) {
+						$font_styles .= 'font-size: ' . $collection['font_size'] . ';';
+					}
+					if($collection['font_color']) {
+						$font_styles .= 'color: ' . $collection['font_color'] . ';';
+					}
 					$font_styles .= " }\n";
 			
 				}
 			}
-		
-			$import_url = '@import url(' . $this->fonts_url . $this->stringify_fonts($import_fonts) .');';
-		
-			$frontend = "\n<style type=\"text/css\">\n";
-			$frontend .= $import_url."\n";
-			$frontend .= $font_styles;
-			$frontend .= "</style>\n";
-		
-			echo $frontend;
+			
+			if(!empty($import_fonts)) {
+
+				$import_url = '@import url(' . $this->fonts_url . $this->stringify_fonts($import_fonts) .');';
+			
+				$frontend = "\n<style type=\"text/css\">\n";
+				$frontend .= $import_url."\n";
+				$frontend .= $font_styles;
+				$frontend .= "</style>\n";
+			
+				echo $frontend;
+
+			}
 		
 		}
 		
@@ -226,33 +234,33 @@ class GoogleTypography {
 	 */
 	function options_ui() {
 		
-		$title								= __('Google Typography', 'google-typography');
-		$loading							= __('Loading Your Collections', 'google-typography');
-		$add_new        			= __('Add New', 'google-typography');
-		$reset        				= __('Reset', 'google-typography');
-		$preview_text   			= __('Type in some text to preview...', 'google-typography');
-		$preview_hint   			= __('Preview Background Color', 'google-typography');
-		$font_family_title  	= __('Font family...', 'google-typography');
-		$font_variant_title 	= __('Variant...', 'google-typography');
-		$font_size_title 			= __('Size...', 'google-typography');
-		$css_selectors_title	= __('CSS Selectors (h1, .some_class)', 'google-typography');
-		$delete_button_text   = __('Delete', 'google-typography');
-		$save_button_text			= __('Save', 'google-typography');
+		$title               = __("Google Typography", "google-typography");
+		$loading             = __("Loading Your Collections", "google-typography");
+		$add_new             = __("Add New", "google-typography");
+		$reset               = __("Reset", "google-typography");
+		$preview_text        = __("Type in some text to preview...", "google-typography");
+		$preview_hint        = __("Preview Background Color", "google-typography");
+		$font_family_title   = __("Font family...", "google-typography");
+		$font_variant_title  = __("Variant...", "google-typography");
+		$font_size_title     = __("Size...", "google-typography");
+		$css_selectors_title = __("CSS Selectors (h1, .some_class)", "google-typography");
+		$delete_button_text  = __("Delete", "google-typography");
+		$save_button_text    = __("Save", "google-typography");
 		
-		$welcome_title 				= __('Welcome to Google Typography', 'google-typography');
-		$welcome_subtitle			= __('Get started in 3 steps. Not easy enough? ', 'google-typography').'<a href="https://vimeo.com/67957799" target="_blank">'.__('Watch the video tutorial &#x2192;', 'google-typography').'</a>';
-		$step_1_title 				= __('1. Pick A Font', 'google-typography');
-		$step_1_desc					= __('Choose from any of the 600+ Google Fonts.', 'google-typography');
-		$step_2_title 				= __('2. Customize It', 'google-typography');
-		$step_2_desc					= __('Pick a size, variant, color and more.', 'google-typography');
-		$step_3_title 				= __('3. Attach It', 'google-typography');
-		$step_3_desc					= __('Attach your font to any CSS selector(s).', 'google-typography');
-		$year									= date("Y");
+		$welcome_title       = __("Welcome to Google Typography", "google-typography");
+		$welcome_subtitle    = __("Get started in 3 steps. Not easy enough? ", "google-typography") . "<a href=\"https://vimeo.com/67957799\" target=\"_blank\">" . __("Watch the video tutorial &#x2192;", "google-typography") . "</a>";
+		$step_1_title        = __("1. Pick A Font", "google-typography");
+		$step_1_desc         = __("Choose from any of the 600+ Google Fonts.", "google-typography");
+		$step_2_title        = __("2. Customize It", "google-typography");
+		$step_2_desc         = __("Pick a size, variant, color and more.", "google-typography");
+		$step_3_title        = __("3. Attach It", "google-typography");
+		$step_3_desc         = __("Attach your font to any CSS selector(s).", "google-typography");
+		$year                = date("Y");
 		
 		$fonts = $this->get_fonts();
 		$font_families = "";
 		foreach ($fonts as $font) {
-			$font_family = $font['family'];
+			$font_family = $font["family"];
 			$font_families .= "<option value=\"$font_family\">$font_family</option>";
 		}
 		
@@ -262,8 +270,8 @@ class GoogleTypography {
 		}
 		
 		if(get_option("google_typography_default")) {
-			$reset_link = '<a href="javascript:;" class="add-new-h2 reset_collections">'.$reset.'</a>';
-		} else { $reset_link = ''; }
+			$reset_link = "<a href=\"javascript:;\" class=\"add-new-h2 reset_collections\">" . $reset . "</a>";
+		} else { $reset_link = ""; }
 		
 		echo <<<EOT
 			<div id="google_typography" class="wrap">
@@ -343,7 +351,6 @@ class GoogleTypography {
 				
 				<div class="collections"></div>
 			</div>
-				
 EOT;
 		
 	}
@@ -359,13 +366,13 @@ EOT;
 	 */
 	function ajax_get_user_fonts() {
 		
-		$collections = get_option('google_typography_collections');
+		$collections = get_option("google_typography_collections");
 		
 		$retrieved = $collections ? true : false;
 
-		$response = json_encode( array( 'success' => $retrieved, 'collections' => $collections ) );
+		$response = json_encode(array("success" => $retrieved, "collections" => $collections));
 		
-		header( "Content-Type: application/json" );
+		header("Content-Type: application/json");
 		echo $response;
 		
 		exit;
@@ -383,13 +390,13 @@ EOT;
 	 */
 	function ajax_save_user_fonts() {
 		
-		$collections = $_REQUEST['collections'];
+		$collections = $_REQUEST["collections"];
 		
-		$collections = update_option('google_typography_collections', $collections);
+		$collections = update_option("google_typography_collections", $collections);
 		
-		$response = json_encode( array( 'success' => true, 'collections' => $collections ) );
+		$response = json_encode(array("success" => true, "collections" => $collections));
 		
-		header( "Content-Type: application/json" );
+		header("Content-Type: application/json");
 		echo $response;
 		
 		exit;
@@ -407,12 +414,12 @@ EOT;
 	 */
 	function ajax_reset_user_fonts() {
 		
-		delete_option('google_typography_default');
-		delete_option('google_typography_collections');
+		delete_option("google_typography_default");
+		delete_option("google_typography_collections");
 		
-		$response = json_encode( array( 'success' => true ) );
+		$response = json_encode(array("success" => true));
 		
-		header( "Content-Type: application/json" );
+		header("Content-Type: application/json");
 		echo $response;
 		
 		exit;
@@ -450,12 +457,12 @@ EOT;
 	function ajax_get_google_font_variants() { 
 
 		$fonts = $this->get_fonts();
-		$font_family = $_GET['font_family'];
+		$font_family = $_GET["font_family"];
 		
-		$result = $this->multidimensional_search($fonts, array('family' => $font_family));
+		$result = $this->multidimensional_search($fonts, array("family" => $font_family));
 		
 		header("Content-Type: application/json");
-		echo json_encode($result['variants']);
+		echo json_encode($result["variants"]);
 		
 		exit;
 	}
@@ -473,13 +480,13 @@ EOT;
 	 *
 	 */
 	function get_fonts() {
-		$fonts = get_transient( 'google_typography_fonts' );	
+		$fonts = get_transient("google_typography_fonts");	
 
 		if (false === $fonts)	{
 
 			$request = wp_remote_get($this->api_url);
 
-			if( is_wp_error( $request ) ) {
+			if(is_wp_error($request)) {
 
 			   $error_message = $request->get_error_message();
 			
@@ -491,7 +498,7 @@ EOT;
 
 				$data = json_decode($json, TRUE);
 
-				$items = $data['items'];
+				$items = $data["items"];
 				
 				$i = 0;
 				
@@ -510,11 +517,11 @@ EOT;
 						}
 					}
 
-					$fonts[] = array('uid' => $i, 'family' => $item['family'], 'variants' => $variants);
+					$fonts[] = array("uid" => $i, "family" => $item["family"], "variants" => $variants);
 
 				}
 				
-				set_transient( 'google_typography_fonts', $fonts, 60 * 60 * 24 );
+				set_transient("google_typography_fonts", $fonts, 60 * 60 * 24);
 
 			}
 
@@ -531,7 +538,7 @@ EOT;
 	 *
 	 */
 	function multidimensional_search($parents, $searched) {
-	  if (empty($searched) || empty($parents)) {
+	  if(empty($searched) || empty($parents)) {
 	    return false;
 	  }
 
@@ -557,27 +564,31 @@ EOT;
 	 *
 	 */
 	function admin_scripts() {
+
+		// Grab the plugin version
+		$plugin_data = get_plugin_data(__FILE__);
 		
 		//Javascripts
-		wp_register_script('google-webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.2/webfont.js', false);
-		wp_register_script('google-typography', plugin_dir_url(__FILE__) . 'javascripts/google-typography.js', array('jquery', 'jquery-ui-sortable', 'wp-color-picker'));
-		wp_register_script('chosen', plugin_dir_url(__FILE__) . 'javascripts/jquery.chosen.js', array('jquery'));
-		wp_enqueue_script('google-webfont');
-		wp_enqueue_script('google-typography');
-		wp_enqueue_script('chosen');
+		wp_enqueue_script("google-webfont", "https://ajax.googleapis.com/ajax/libs/webfont/1.4.2/webfont.js", false, $plugin_data["Version"], true);
+		wp_enqueue_script("google-typography", plugin_dir_url(__FILE__) . "javascripts/google-typography.js", array("jquery", "jquery-ui-sortable", "wp-color-picker"), $plugin_data["Version"], true);
+		wp_enqueue_script("chosen", plugin_dir_url(__FILE__) . "javascripts/jquery.chosen.js", array("jquery"), $plugin_data["Version"], true);
 		
 		// Stylesheets
-		wp_register_style('google-typography', plugin_dir_url(__FILE__) . 'stylesheets/google-typography.css', false, '1.0.0');
-		wp_register_style('chosen', plugin_dir_url(__FILE__) . 'stylesheets/chosen.css', false, '1.0.0');
-		wp_register_style('google-font', 'http://fonts.googleapis.com/css?family=Lato:300,400');
-		wp_enqueue_style('google-typography');
-		wp_enqueue_style('chosen');
-		wp_enqueue_style('google-font');
-		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_style("google-typography", plugin_dir_url(__FILE__) . "stylesheets/google-typography.css", array(), $plugin_data["Version"], "screen");
+		wp_enqueue_style("chosen", plugin_dir_url(__FILE__) . "stylesheets/chosen.css", array(), $plugin_data["Version"], "screen");
+		wp_enqueue_style("google-font", "//fonts.googleapis.com/css?family=Lato:300,400", array(), $plugin_data["Version"], "screen");
+		wp_enqueue_style("wp-color-picker");
 	}
 }
 
-GoogleTypography::init();
+
+/**
+ * Initiate the plugin
+ */
+if(class_exists("GoogleTypography")) {
+    // instantiate the plugin class
+    $google_typography = GoogleTypography::init();
+}
 
 /**
  * Function for registering default typography collections 
@@ -589,22 +600,22 @@ GoogleTypography::init();
  */
 function register_typography($collections) {
 
-	if(!get_option('google_typography_default')) {
+	if(!get_option("google_typography_default")) {
 
 		$defaults = array();
-		delete_option('google_typography_collections');
+		delete_option("google_typography_collections");
 
 		foreach($collections as $key => $collection) {
 			array_push($defaults, 
 				array_merge(
-					array('default' => true), 
+					array("default" => true), 
 					$collection
 				)
 			);
 		}
  
-		update_option('google_typography_default', true);
-		update_option('google_typography_collections', $defaults);
+		update_option("google_typography_default", true);
+		update_option("google_typography_collections", $defaults);
 
 	} 
 }

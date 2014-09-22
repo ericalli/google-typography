@@ -137,25 +137,25 @@
 					collection.find(".save_collection").addClass("saving").html("Saving...");
 				}
 
-				previewText		= $(this).find(".preview_text").val();
-				previewColor	= $(this).find(".preview_color li.current a").attr("class");
-				fontFamily		= $(this).find(".font_family").val();
-				fontVariant		= $(this).find(".font_variant").val();
-				fontSize			= $(this).find(".font_size").val();
-				fontColor			= $(this).find(".font_color").val();
-				cssSelectors	= $(this).find(".css_selectors").val();
-				isDefault			= $(this).attr("data-default");
+				previewText  = $(this).find(".preview_text").val();
+				previewColor = $(this).find(".preview_color li.current a").attr("class");
+				fontFamily   = $(this).find(".font_family").val();
+				fontVariant  = $(this).find(".font_variant").val();
+				fontSize     = $(this).find(".font_size").val();
+				fontColor    = $(this).find(".font_color").val();
+				cssSelectors = $(this).find(".css_selectors").val();
+				isDefault    = $(this).attr("data-default");
         
 				collectionData[i] = {
-					uid: i+1,
-					preview_text: previewText,
-					preview_color: previewColor,
-					font_family: fontFamily,
-					font_variant: fontVariant, 
-					font_size: fontSize,
-					font_color: fontColor,
-					css_selectors: cssSelectors,
-					default: isDefault
+					uid           : i+1,
+					preview_text  : previewText,
+					preview_color : previewColor,
+					font_family   : fontFamily,
+					font_variant  : fontVariant, 
+					font_size     : fontSize,
+					font_color    : fontColor,
+					css_selectors : cssSelectors,
+					default       : isDefault
 				};
   
 				i++;
@@ -188,8 +188,7 @@
 					.trigger("liszt:updated");
 			}
 				
-			// fontVariant		= $(this).find(".font_variant").val();
-			collection.find(".font_size option[value="+values.font_size+"]")
+			collection.find(".font_size option[value='"+values.font_size+"']")
 				.attr("selected", "selected")
 				.trigger("change")
 				.trigger("liszt:updated");
