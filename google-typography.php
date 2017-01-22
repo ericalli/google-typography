@@ -3,7 +3,7 @@
 Plugin Name: Google Typography
 Plugin URI: http://projects.ericalli.com/google-typography/
 Description: A simple plugin that lets you use and customize (in real-time!) any fonts from Google Fonts on your existing site, all without writing a single line of code.
-Version: 1.1
+Version: 1.1.1
 Author: Eric Alli
 Author URI: http://ericalli.com
 */
@@ -257,7 +257,7 @@ class GoogleTypography {
 		$welcome_title       = __("Welcome to Google Typography", "google-typography");
 		$welcome_subtitle    = __("Get started in 3 steps. Not easy enough? ", "google-typography") . "<a href=\"https://vimeo.com/67957799\" target=\"_blank\">" . __("Watch the video tutorial &#x2192;", "google-typography") . "</a>";
 		$step_1_title        = __("1. Pick A Font", "google-typography");
-		$step_1_desc         = __("Choose from any of the 600+ Google Fonts.", "google-typography");
+		$step_1_desc         = __("Choose from any of the 800+ Google Fonts.", "google-typography");
 		$step_2_title        = __("2. Customize It", "google-typography");
 		$step_2_desc         = __("Pick a size, variant, color and more.", "google-typography");
 		$step_3_title        = __("3. Attach It", "google-typography");
