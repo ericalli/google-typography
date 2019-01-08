@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Google Typography
-Plugin URI: http://projects.ericalli.com/google-typography/
+Plugin URI: https://github.com/ericalli/google-typography
 Description: A simple plugin that lets you use and customize (in real-time!) any fonts from Google Fonts on your existing site, all without writing a single line of code.
-Version: 1.1.1
+Version: 1.1.2
 Author: Eric Alli
 Author URI: http://ericalli.com
 */

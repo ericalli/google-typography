@@ -12,7 +12,7 @@
 			collection.find("select").chosen();
       
 			// Colorpicker
-			collection.find(".font_color").wpColorPicker({
+			collection.find(".font_color").not('[id*="__i__"]').wpColorPicker({
 				change: function(event, ui) {
 					preview.css( 'color', ui.color.toString());
 				}

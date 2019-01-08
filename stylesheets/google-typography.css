@@ -161,11 +161,13 @@ div#google_typography { }
 			div#google_typography .font_options .font_family       { width: 210px; }
 			div#google_typography .font_options .font_variant      { width: 105px; }
 			div#google_typography .font_options .font_size         { width: 105px; }
+			div#google_typography .font_options .wp-picker-container { display: inline-block; }
 			div#google_typography .font_options .wp-color-result { 
-			  height: 30px;
-			  margin: -8px 0px 0px 0;
+			  height: 33px;
+			  margin: -6px 0px 0px 0;
 			  vertical-align: top;
 			}
+			div#google_typography .font_options .wp-color-result-text { padding: 5px 6px; }
 			div#google_typography .font_options .wp-color-result:after { line-height: 30px; }
 			div#google_typography .font_options .wp-picker-open { top: 1px; }
 			div#google_typography .font_options .wp-picker-holder { position: absolute; }
@@ -175,7 +177,12 @@ div#google_typography { }
 			div#google_typography .font_options .font_color,
 			div#google_typography .font_options .css_selectors { padding: 7px 7px 8px 7px; margin: 0; }
 			div#google_typography .font_options .font_color { margin-left: 3px; }
-			div#google_typography .font_options .css_selectors { width: 220px; }	
+			div#google_typography .font_options .css_selectors { 
+				width: 220px;
+				top: 2px;
+  			position: relative;
+  			border-radius: 2px;
+			}	
 		div#google_typography .font_options a.save_collection.saving { opacity: .5; }
 		div#google_typography .font_options a.delete_collection { 
 			color: #f00; 
@@ -183,6 +190,8 @@ div#google_typography { }
 			text-decoration: none; 
 			border-bottom: 1px solid; 
 			padding: 1px 2px;
+			top: 5px;
+			position: relative;
 			-webkit-transition: all 0.2s ease-in;  
 	    	-moz-transition: all 0.2s ease-in;  
 	    	-o-transition: all 0.2s ease-in;  

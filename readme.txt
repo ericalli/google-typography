@@ -3,8 +3,8 @@
 Contributors: ericalli
 Tags: fonts, fonts, typography, font, free fonts, google, google fonts, font manager, type
 Requires at least: 3.5
-Tested up to: 4.7
-Stable tag: 1.1.1
+Tested up to: 5.0
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ It can also be installed manually:
 3. Amazing typography, all without writing a single line of code.
 
 ==Changelog==
+
+= 1.1.2 =
+
+* Minor fixes and updates for WordPress v5.x compatibility
 
 = 1.1.1 =
 
